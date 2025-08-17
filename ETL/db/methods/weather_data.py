@@ -3,11 +3,16 @@ from sqlalchemy import func
 from db.models import WeatherData, Location
 import datetime
 import requests
+import time
+import logging
 
+logger = logging.getLogger(__name__)
 
+SLEEP_TIME = 240
+TOO_MANY_REQUESTS_STATUS_CODE = 429
 MIN_START_DATE = datetime.date(1950, 1, 1)
-DEFAULT_DATE_TO = datetime.date.today() - datetime.timedelta(days=3)
-DELTA_STEP = datetime.timedelta(days=365)
+DEFAULT_DATE_TO = datetime.date.today() - datetime.timedelta(days=5)
+DELTA_STEP = datetime.timedelta(days=7500)
 DELTA_ONE_DAY = datetime.timedelta(days=1)
 URL = "https://archive-api.open-meteo.com/v1/archive?latitude={lat}&longitude={lon}&start_date={start_date}&end_date={end_date}" \
 "&daily=weather_code,temperature_2m_max,temperature_2m_min,temperature_2m_mean,rain_sum,precipitation_sum,sunshine_duration,snowfall_sum,wind_direction_10m_dominant"
@@ -15,7 +20,8 @@ URL = "https://archive-api.open-meteo.com/v1/archive?latitude={lat}&longitude={l
 
 def get_date_from(db: Session, location_id: int) -> str:
     last_date = db.query(func.max(WeatherData.date)).filter(WeatherData.location_id == location_id).scalar()
-    return last_date + DELTA_ONE_DAY if last_date else MIN_START_DATE
+    last_date = last_date + DELTA_ONE_DAY if last_date != DEFAULT_DATE_TO and last_date else last_date
+    return last_date if last_date else MIN_START_DATE
 
 def build_date_to(date_from: datetime.date, date_to: datetime.date) -> datetime.date:
     time_delta = date_to - date_from
@@ -24,8 +30,8 @@ def build_date_to(date_from: datetime.date, date_to: datetime.date) -> datetime.
 def weather_data_service(db: Session, location: Location, date_to=DEFAULT_DATE_TO):
     date_from = get_date_from(db=db, location_id=location.id)
 
-    if date_from >= date_to:
-        raise Exception("Bad date parameters: {date_from} & {date_to}!")
+    if date_from > date_to:
+        raise Exception(f"Bad date parameters: {date_from} & {date_to}!")
     
     while date_from < date_to:
         date_to_step = build_date_to(date_from=date_from, date_to=date_to)
@@ -38,9 +44,24 @@ def weather_data_service(db: Session, location: Location, date_to=DEFAULT_DATE_T
 def extract_weather_data(lat: float, lon: float, date_from: str, date_to: str):
     url = URL.format(lat=lat, lon=lon, start_date=date_from, end_date=date_to)
     response = requests.get(url)
-    if response.status_code != requests.codes.ok:
-        response.raise_for_status()
-    return response.json().get("daily")
+    iteration_ind = 1
+    try:
+        while True:
+            if response.status_code == requests.codes.ok:
+                break
+            if response.status_code == TOO_MANY_REQUESTS_STATUS_CODE:
+                now = datetime.datetime.now()
+                iteration_sleep_time = SLEEP_TIME * iteration_ind
+                delta = datetime.timedelta(seconds=iteration_sleep_time)
+                print(f"Went to sleep..be back at {now + delta}")
+                time.sleep(iteration_sleep_time)
+                response = requests.get(url)
+                iteration_ind = iteration_ind + 1
+            else: 
+                response.raise_for_status()
+        return response.json().get("daily")
+    except Exception as error:
+        logger.error(f"Unexpected error happenned: {error}. Response data: {response.status_code}, {response.text}")
 
 def parse_weather_data(daily_data: str, location_id: int) -> list[WeatherData]:
     time = daily_data.get("time")

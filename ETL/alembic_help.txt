@@ -1,0 +1,15 @@
+Key Alembic Commands:
+alembic init <directory>: Initializes a new Alembic environment in the specified directory, creating the necessary configuration files and a versions folder for migration scripts.
+alembic revision -m "message": Generates a new migration script with a unique revision ID and the provided message. This script contains upgrade() and downgrade() functions for defining schema changes.
+alembic revision --autogenerate -m "message": Generates a new migration script by automatically detecting schema changes between the current database state and your SQLAlchemy models.
+alembic upgrade head: Applies all pending migrations up to the latest revision (head) in the versions directory to the database.
+alembic upgrade <revision_id>: Applies migrations up to a specific revision ID.
+alembic downgrade -1: Reverts the last applied migration.
+alembic downgrade <revision_id>: Reverts migrations down to a specific revision ID.
+alembic current: Displays the current revision ID of the database.
+alembic history: Shows the history of all migration revisions, including their IDs, messages, and relationships.
+alembic stamp head: Marks the database with the latest revision ID without actually running any migrations. Useful for initializing a new database with existing schema.
+alembic branches: Shows all current "heads" or branch points in the migration history.
+alembic merge <revision1> <revision2> -m "message": Merges two branches of migration history into a new revision.
+alembic list_templates: Lists available environment templates for alembic init.
+alembic show <revision_id>: Displays the contents of a specific migration script.
