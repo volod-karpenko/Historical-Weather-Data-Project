@@ -13,8 +13,8 @@ The main tracked metrics include:
 [Link to the published report](https://app.powerbi.com/view?r=eyJrIjoiZWNiMWZjMTQtMTZkZS00ZWQyLTlkZTQtYTQ5NGQzNGExYmU3IiwidCI6ImZlYjM4NTE4LTFmMGUtNDVkOS1hNzA1LWUyMDZiZWQ5MWI1ZCIsImMiOjl9&pageName=4d87d0aa3588cde68060) *(at some moment it will not be accessible anymore)*  
 
 Gif preview :point_down:  
-[![hwd-summary-page-demo.gif](https://i.postimg.cc/wMNtgPVy/hwd-summary-page-demo.gif)](https://postimg.cc/2Lzjx0gr)
-[![hwd-detail-page-demo.gif](https://i.postimg.cc/D0cSSG9n/hwd-detail-page-demo.gif)](https://postimg.cc/Mfv64nZF)
+![summary-page-demo.gif](Power%20BI/Screenshots/hwd_summary_page_demo.gif)
+![detail-page-demo.gif](Power%20BI/Screenshots/hwd_detail_page_demo.gif)
 
 The tracked cities are:
 - Athens, Greece
@@ -32,17 +32,17 @@ The tracked cities are:
 ## :page_with_curl: Pages
 
 1. :globe_with_meridians: **Summary** - compares key weather metrics between the cities.  
-![hwd-summary.png](Power%20BI/Screenshots/hwd_summary.png)  
+![summary.png](Power%20BI/Screenshots/hwd_summary.png)  
 **Year** & **Season** filters are placed at the top right of the page. They leverage the interactivity of the displayed data and facilitate understanding weather trends within a specific date period or season.  
 **Detail View** page navigation button is placed at the top left of the page. It jumps you the **Detail** page. 
 
 2. :mag: **Detail** - highlights main trends & insights for a specific city.  
-![hwd-detail.png](Power%20BI/Screenshots/hwd_detail.png)  
+![detail.png](Power%20BI/Screenshots/hwd_detail.png)  
 **Season** filter is placed at the top right of the page. It helps understanding weather trends within a specifc season.  
 **Summary View** page navigation button is placed at the top left of the page. It jumps you the **Summary** page.    
 **City** filter is placed on the right, vertically centered. It allows to switch between cities uncovering each city unique weather patterns.  
 **Metric Switcher** is placed at the bottom right of the page. It empowers to change the displayed metric on a *Line Chart* and *Variation by Wind Direction* visuals. :point_down:  
-![hwd-detail-metric-switcher.png](Power%20BI/Screenshots/hwd_detail_metric_switcher.png)  
+![detail-metric-switcher.png](Power%20BI/Screenshots/hwd_detail_metric_switcher.png)  
 ### :question: Delta Numbers
 As for the *delta* numbers - the ones that are displayed on the top five card visuals & between the values on the line chart - they show the growth of the corresponding metric between the current year bin *(last 5 years for card visuals)* and all the prior years.  
 For example: for card visuals it is *2020-2024 vs 1950-2019*, for line chart at the point of 2010 it is *2010-2014 vs 1950-2009*.
