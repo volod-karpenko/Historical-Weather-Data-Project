@@ -10,7 +10,7 @@ The main tracked metrics include:
 - **Snow Sum** - calculated as the annual snow sum, then averaged across all years  
 - **Sunshine Time Sum** *(only in **summary** view)* - calculated as the annual sunshine time sum, then averaged across all years   
 
-[Link to the published report](https://app.powerbi.com/view?r=eyJrIjoiZWNiMWZjMTQtMTZkZS00ZWQyLTlkZTQtYTQ5NGQzNGExYmU3IiwidCI6ImZlYjM4NTE4LTFmMGUtNDVkOS1hNzA1LWUyMDZiZWQ5MWI1ZCIsImMiOjl9&pageName=4d87d0aa3588cde68060) *(at some moment it will not be accessible anymore)*  
+[Link to the published report]([https://app.powerbi.com/view?r=eyJrIjoiZWNiMWZjMTQtMTZkZS00ZWQyLTlkZTQtYTQ5NGQzNGExYmU3IiwidCI6ImZlYjM4NTE4LTFmMGUtNDVkOS1hNzA1LWUyMDZiZWQ5MWI1ZCIsImMiOjl9&pageName=4d87d0aa3588cde68060](https://app.powerbi.com/view?r=eyJrIjoiNDJlMGZkYjgtMWM4ZS00N2MyLWI3ZWMtNDVkMTg1MDFiOGYzIiwidCI6ImZlYjM4NTE4LTFmMGUtNDVkOS1hNzA1LWUyMDZiZWQ5MWI1ZCIsImMiOjl9)) *(at some moment it will not be accessible anymore)*  
 
 [Watch short demo on YouTube](https://youtu.be/28tM9Kw2AJQ)  
 [![Watch short demo on YouTube](https://img.youtube.com/vi/28tM9Kw2AJQ/default.jpg)](https://youtu.be/28tM9Kw2AJQ)
